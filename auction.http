@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/branches
+Content-Type: application/json
+
+{
+  "name": "fries"
+}
+
+###
