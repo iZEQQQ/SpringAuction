@@ -1,10 +1,13 @@
 package jgorny.auction.controller;
 
 import jgorny.auction.controller.model.GetBranchResponse;
+import jgorny.auction.controller.model.GetBranchesResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/branches")
@@ -15,6 +18,9 @@ public class BranchController {
         return new GetBranchResponse(id,"meat");
     }
 
-
+    @GetMapping("")
+    public GetBranchesResponse getBranches(){
+        return new GetBranchesResponse(List.of(1l,3l,9l,5l,6l,8l,4l,7l));
+    }
 
 }
