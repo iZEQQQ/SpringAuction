@@ -6,3 +6,14 @@ Content-Type: application/json
 }
 
 ###
+PUT http://localhost:8080/api/branches/1
+Content-Type: application/json
+
+{
+  "name": "fries"
+}
+
+###
+DELETE http://localhost:8080/api/branches/1
+
+###
