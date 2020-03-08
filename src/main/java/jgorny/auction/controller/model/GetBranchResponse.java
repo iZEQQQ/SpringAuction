@@ -11,6 +11,7 @@ import lombok.*;
 public class GetBranchResponse {
 
     private Long id;
+
     private String name;
 
 }
