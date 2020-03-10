@@ -1,9 +1,9 @@
 package jgorny.auction.controller;
 
-import jgorny.auction.controller.model.GetCategoriesResponse;
-import jgorny.auction.controller.model.GetCategoryResponse;
-import jgorny.auction.controller.model.PostCategoryRequest;
-import jgorny.auction.controller.model.PutCategoryRequest;
+import jgorny.auction.controller.model.category.GetCategoriesResponse;
+import jgorny.auction.controller.model.category.GetCategoryResponse;
+import jgorny.auction.controller.model.category.PostCategoryRequest;
+import jgorny.auction.controller.model.category.PutCategoryRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +36,5 @@ public class CategoryController {
     public void deleteCategory(@PathVariable("id") Long id){
         System.out.println(id);
     }
-
 
 }

@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model;
+package jgorny.auction.controller.model.category;
 
 import lombok.*;
 
@@ -8,7 +8,9 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PutBranchRequest {
+public class GetCategoryResponse {
+
+    private Long id;
 
     private String name;
 

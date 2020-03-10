@@ -1,9 +1,9 @@
 package jgorny.auction.controller;
 
-import jgorny.auction.controller.model.GetBranchResponse;
-import jgorny.auction.controller.model.GetBranchesResponse;
-import jgorny.auction.controller.model.PostBranchRequest;
-import jgorny.auction.controller.model.PutBranchRequest;
+import jgorny.auction.controller.model.branch.GetBranchResponse;
+import jgorny.auction.controller.model.branch.GetBranchesResponse;
+import jgorny.auction.controller.model.branch.PostBranchRequest;
+import jgorny.auction.controller.model.branch.PutBranchRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
