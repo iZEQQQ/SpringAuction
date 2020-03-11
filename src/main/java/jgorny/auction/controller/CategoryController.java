@@ -18,7 +18,7 @@ public class CategoryController {
     }
 
     @GetMapping("")
-    public GetCategoriesResponse getCategories(@PathVariable("id") Long id){
+    public GetCategoriesResponse getCategories(){
         return new GetCategoriesResponse(List.of(24l,8l,2l,42l,4l,2l));
     }
     @PostMapping("")

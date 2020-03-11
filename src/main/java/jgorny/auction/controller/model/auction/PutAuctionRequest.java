@@ -8,9 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAuctionResponse {
-
-    private Long id;
+public class PutAuctionRequest {
 
     private String name;
 
