@@ -18,7 +18,7 @@ public class AuctionController {
 
     @GetMapping("")
     public GetAuctionsResponse getAuctions(){
-        return new GetAuctionsResponse(List.of(1,2,3,4,5,6,7));
+        return new GetAuctionsResponse(List.of(1l,2l,3l,4l,5l,6l,7l));
     }
 
     @PutMapping("{id}")

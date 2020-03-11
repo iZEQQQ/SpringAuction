@@ -38,3 +38,23 @@ Content-Type: application/json
 DELETE http://localhost:8080/api/branches/1/categories/2
 
 ###
+
+POST http://localhost:8080/api/branches/1/categories/3/auctions
+Content-Type: application/json
+
+{
+  "name": "phone"
+}
+
+###
+PUT http://localhost:8080/api/branches/1/categories/2/auctions/1
+Content-Type: application/json
+
+{
+  "name": "computer"
+}
+
+###
+DELETE http://localhost:8080/api/branches/1/categories/2/auctions/1
+
+###
