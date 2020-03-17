@@ -4,6 +4,8 @@ import jgorny.portal.branch.controller.model.GetBranchResponse;
 import jgorny.portal.branch.controller.model.GetBranchesResponse;
 import jgorny.portal.branch.controller.model.PostBranchRequest;
 import jgorny.portal.branch.controller.model.PutBranchRequest;
+import jgorny.portal.branch.serviece.BranchService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/branches")
 public class BranchController {
+
+    private BranchService service;
+
+    @Autowired
+    public BranchController(BranchService service) {
+        this.service = service;
+    }
 
     @GetMapping("{id}")
     public GetBranchResponse getBranch(@PathVariable("id") Long id) {
