@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model.branch;
+package jgorny.portal.branch.controller.model;
 
 import lombok.*;
 
@@ -8,7 +8,9 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostBranchRequest {
+public class GetBranchResponse {
+
+    private Long id;
 
     private String name;
 

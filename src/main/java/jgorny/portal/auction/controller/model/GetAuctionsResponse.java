@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model.branch;
+package jgorny.portal.auction.controller.model;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetBranchesResponse {
+public class GetAuctionsResponse {
 
     private List<Long> ids = new ArrayList<>();
 

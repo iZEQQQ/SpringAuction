@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model.category;
+package jgorny.portal.category.controller.model;
 
 import lombok.*;
 

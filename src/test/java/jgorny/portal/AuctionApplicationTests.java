@@ -1,4 +1,4 @@
-package jgorny.auction;
+package jgorny.portal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model.category;
+package jgorny.portal.auction.controller.model;
 
 import lombok.*;
 
@@ -8,8 +8,11 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostCategoryRequest {
+public class GetAuctionResponse {
+
+    private Long id;
 
     private String name;
 
+    private Double price;
 }

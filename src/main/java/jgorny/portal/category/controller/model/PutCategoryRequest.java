@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model.auction;
+package jgorny.portal.category.controller.model;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostAuctionRequest {
+public class PutCategoryRequest {
 
     private String name;
 

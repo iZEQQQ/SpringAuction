@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model.branch;
+package jgorny.portal.category.controller.model;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class PutBranchRequest {
+public class PostCategoryRequest {
 
     private String name;
 

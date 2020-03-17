@@ -1,4 +1,4 @@
-package jgorny.auction.controller.model.auction;
+package jgorny.portal.category.controller.model;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAuctionsResponse {
+public class GetCategoriesResponse {
 
     private List<Long> ids = new ArrayList<>();
 
