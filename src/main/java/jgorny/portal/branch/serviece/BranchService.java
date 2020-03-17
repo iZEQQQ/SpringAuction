@@ -21,4 +21,8 @@ public class BranchService {
         return repository.findAll();
     }
 
+    public List<Long> findAllIds(){
+        return repository.findId();
+    }
+
 }

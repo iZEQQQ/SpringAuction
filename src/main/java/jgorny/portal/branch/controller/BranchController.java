@@ -28,7 +28,7 @@ public class BranchController {
 
     @GetMapping("")
     public GetBranchesResponse getBranches() {
-        return new GetBranchesResponse(List.of(1l, 3l, 9l, 5l, 6l, 8l, 4l, 7l));
+        return new GetBranchesResponse(service.findAllIds());
     }
 
     @PostMapping("")
