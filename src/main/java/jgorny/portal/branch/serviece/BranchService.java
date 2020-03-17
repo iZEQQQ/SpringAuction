@@ -5,7 +5,9 @@ import jgorny.portal.branch.serviece.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BranchService {
@@ -17,12 +19,15 @@ public class BranchService {
         this.repository = repository;
     }
 
-    public List<Branch> findAllBranches(){
+    public List<Branch> findAllBranches() {
         return repository.findAll();
     }
 
-    public List<Long> findAllIds(){
+    public List<Long> findAllIds() {
         return repository.findId();
     }
 
+    public Optional<Branch> findBranch(Long id) {
+        return repository.findById(id);
+    }
 }
