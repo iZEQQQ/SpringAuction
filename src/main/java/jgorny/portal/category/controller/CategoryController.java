@@ -64,8 +64,20 @@ public class CategoryController {
     }
 
     @PutMapping("{id}")
-    public void putBranch(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id, @RequestBody PutCategoryRequest category) {
-        System.out.println(id + " " + category);
+    public ResponseEntity<Void> putBranch(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id, @RequestBody PutCategoryRequest category) {
+        Optional<Branch> branch = branchService.findBranch(branchId);
+        if (branch.isPresent()) {
+            Optional<Category> category1 = categoryServiece.findCategory(id);
+            if (category1.isPresent()) {
+                category1.get().setName(category.getName());
+                categoryServiece.updateCategory(category1.get());
+                return ResponseEntity.noContent().build();
+            }else{
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 

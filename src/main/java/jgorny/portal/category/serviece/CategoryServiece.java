@@ -30,4 +30,8 @@ public class CategoryServiece {
     public void createCategory(Category category) {
         repository.save(category);
     }
+
+    public void updateCategory(Category category) {
+        repository.save(category);
+    }
 }
