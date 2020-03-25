@@ -25,4 +25,8 @@ public class Category {
     @JoinColumn(name = "branch")
     private Branch branch;
 
+    public Category(String name, Branch branch) {
+        this.name = name;
+        this.branch = branch;
+    }
 }

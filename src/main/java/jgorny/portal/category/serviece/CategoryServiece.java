@@ -26,4 +26,8 @@ public class CategoryServiece {
     public Optional<Category> findCategory(Long id) {
         return repository.findById(id);
     }
+
+    public void createCategory(Category category) {
+        repository.save(category);
+    }
 }
