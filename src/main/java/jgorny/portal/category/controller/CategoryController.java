@@ -89,11 +89,11 @@ public class CategoryController {
                 categoryServiece.deleteCategory(category1.get());
                 return ResponseEntity.accepted().build();
             } else {
-                ResponseEntity.notFound().build();
+                return ResponseEntity.notFound().build();
             }
 
         } else {
-            ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
     }
 
