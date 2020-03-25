@@ -1,25 +1,56 @@
 package jgorny.portal.category.controller;
 
+import jgorny.portal.branch.serviece.BranchService;
+import jgorny.portal.branch.serviece.model.Branch;
 import jgorny.portal.category.controller.model.GetCategoriesResponse;
 import jgorny.portal.category.controller.model.GetCategoryResponse;
 import jgorny.portal.category.controller.model.PostCategoryRequest;
 import jgorny.portal.category.controller.model.PutCategoryRequest;
+import jgorny.portal.category.serviece.CategoryServiece;
+import jgorny.portal.category.serviece.model.Category;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/branches/{branchId}/categories")
 public class CategoryController {
 
+    private BranchService branchService;
+
+
+    private CategoryServiece categoryServiece;
+
+    @Autowired
+    public CategoryController(BranchService branchService, CategoryServiece categoryServiece) {
+        this.branchService = branchService;
+        this.categoryServiece = categoryServiece;
+    }
+
+
     @GetMapping("{id}")
-    public GetCategoryResponse getCategory(@PathVariable("branchId")int branchId, @PathVariable("id") Long id){
-        return new GetCategoryResponse(id, "phones");
+    public ResponseEntity<GetCategoryResponse> getCategory(@PathVariable("branchId")Long branchId, @PathVariable("id") Long id){
+        Optional<Branch> branch = branchService.findBranch(branchId);
+        if(branch.isPresent()){
+            Optional<Category> category = categoryServiece.findCategory(id);
+            return category.map(value -> ResponseEntity.ok(new GetCategoryResponse(value.getId(), value.getName())))
+                    .orElseGet(() -> ResponseEntity.notFound().build());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
+
+
     }
 
     @GetMapping("")
-    public GetCategoriesResponse getCategories(@PathVariable("branchId")int branchId){
-        return new GetCategoriesResponse(List.of(24l,8l,2l,42l,4l,2l));
+    public ResponseEntity<GetCategoriesResponse> getCategories(@PathVariable("branchId")Long branchId){
+        Optional<Branch> branch = branchService.findBranch(branchId);
+        return branch.map(value -> ResponseEntity.ok(new GetCategoriesResponse(categoryServiece.findAllIds(value))))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
     @PostMapping("")
     public void postCategory(@PathVariable("branchId")int branchId,@RequestBody PostCategoryRequest category){
