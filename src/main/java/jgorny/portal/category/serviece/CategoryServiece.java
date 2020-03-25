@@ -34,4 +34,8 @@ public class CategoryServiece {
     public void updateCategory(Category category) {
         repository.save(category);
     }
+
+    public void deleteCategory(Category category) {
+        repository.delete(category);
+    }
 }

@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -72,7 +71,7 @@ public class CategoryController {
                 category1.get().setName(category.getName());
                 categoryServiece.updateCategory(category1.get());
                 return ResponseEntity.noContent().build();
-            }else{
+            } else {
                 return ResponseEntity.notFound().build();
             }
         } else {
@@ -82,8 +81,20 @@ public class CategoryController {
 
 
     @DeleteMapping("{id}")
-    public void deleteCategory(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id) {
-        System.out.println(id);
+    public ResponseEntity<Void> deleteCategory(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id) {
+        Optional<Branch> branch = branchService.findBranch(branchId);
+        if (branch.isPresent()) {
+            Optional<Category> category1 = categoryServiece.findCategory(id);
+            if (category1.isPresent()) {
+                categoryServiece.deleteCategory(category1.get());
+                return ResponseEntity.accepted().build();
+            } else {
+                ResponseEntity.notFound().build();
+            }
+
+        } else {
+            ResponseEntity.notFound().build();
+        }
     }
 
 }
