@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,18 +38,35 @@ public class BranchController {
     }
 
     @PostMapping("")
-    public void postBranch(@RequestBody PostBranchRequest branch) {
-        System.out.println(branch);
+    public ResponseEntity<Void> postBranch(@RequestBody PostBranchRequest branch) {
+        Branch b = new Branch(branch.getName());
+        service.createBranch(b);
+        return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + b.getId())).build();
     }
 
     @PutMapping("{id}")
-    public void putBranch(@PathVariable("id") Long id, @RequestBody PutBranchRequest branch) {
-        System.out.println(id +" "+ branch);
+    public ResponseEntity<Void> putBranch(@PathVariable("id") Long id, @RequestBody PutBranchRequest branch) {
+        Optional<Branch> b = service.findBranch(id);
+        if (b.isPresent()) {
+            b.get().setName(branch.getName());
+            service.updateBranch(b.get());
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @DeleteMapping("{id}")
-    public void deleteBranch(@PathVariable("id") Long id){
-        System.out.println(id);
+    public ResponseEntity<Void> deleteBranch(@PathVariable("id") Long id) {
+        Optional<Branch> b = service.findBranch(id);
+        if (b.isPresent()) {
+            service.deleteBranch(b.get());
+            return ResponseEntity.accepted().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
 }
+
+
