@@ -59,18 +59,18 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/api/branches/1/categories/2/auctions/1
+PUT http://localhost:8080/api/branches/1/categories/3/auctions/1
 Content-Type: application/json
 
 {
-  "name": "computer",
+  "name": "pc",
   "price": 300
 }
 
 ###
-DELETE http://localhost:8080/api/branches/1/categories/2/auctions/1
+DELETE http://localhost:8080/api/branches/1/categories/2/auctions/2
 
 ###
-GET http://localhost:8080/api/branches/1/categories/3/auctions/4
+GET http://localhost:8080/api/branches/1/categories/3/auctions/2
 
 ###

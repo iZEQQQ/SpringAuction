@@ -89,13 +89,50 @@ public class AuctionController {
     }
 
     @PutMapping("{id}")
-    public void putAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("id") Long id, @RequestBody PutAuctionRequest auction) {
-
+    public ResponseEntity<Void> putAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("id") Long id, @RequestBody PutAuctionRequest auction) {
+        Optional<Branch> branch = branchService.findBranch(branchId);
+        if (branch.isPresent()) {
+            Optional<Category> category1 = categoryServiece.findCategory(categoryId);
+            if (category1.isPresent()) {
+                Optional<Auction> auction1 = auctionServiece.findAuction(id);
+                if(auction1.isPresent()){
+                    auction1.get().setName(auction.getName());
+                    auction1.get().setPrice(auction.getPrice());
+                    auctionServiece.updateAuction(auction1.get());
+                    return ResponseEntity.noContent().build();
+                }else{
+                    return ResponseEntity.notFound().build();
+                }
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("{id}")
-    public void deleteAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("id") Long id) {
-        System.out.println(id);
+    public ResponseEntity<Void> deleteAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("id") Long id) {
+        Optional<Branch> branch = branchService.findBranch(branchId);
+        if (branch.isPresent()) {
+            Optional<Category> category1 = categoryServiece.findCategory(categoryId);
+            if (category1.isPresent()) {
+               Optional<Auction> auction = auctionServiece.findAuction(id);
+                if(auction.isPresent()){
+                    auctionServiece.deleteAuction(auction.get());
+                    return ResponseEntity.accepted().build();
+                }else{
+                    return ResponseEntity.notFound().build();
+                }
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+
     }
 
 
