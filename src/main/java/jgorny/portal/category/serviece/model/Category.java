@@ -1,9 +1,11 @@
 package jgorny.portal.category.serviece.model;
 
+import jgorny.portal.auction.serviece.model.Auction;
 import jgorny.portal.branch.serviece.model.Branch;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +31,7 @@ public class Category {
         this.name = name;
         this.branch = branch;
     }
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Auction> auctions;
 }

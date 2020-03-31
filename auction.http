@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/api/branches/1
+DELETE http://localhost:8080/api/branches/3
 
 ###
 GET http://localhost:8080/api/branches/3/categories
@@ -69,5 +69,8 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8080/api/branches/1/categories/2/auctions/1
+
+###
+GET http://localhost:8080/api/branches/1/categories/3/auctions/4
 
 ###

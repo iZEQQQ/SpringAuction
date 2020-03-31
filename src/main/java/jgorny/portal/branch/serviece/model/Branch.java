@@ -1,8 +1,10 @@
 package jgorny.portal.branch.serviece.model;
 
+import jgorny.portal.category.serviece.model.Category;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,5 +26,8 @@ public class Branch {
     public Branch(String name) {
         this.name=name;
     }
+
+    @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Category> categories;
 
 }

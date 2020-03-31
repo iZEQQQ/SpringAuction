@@ -63,7 +63,7 @@ public class CategoryController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> putBranch(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id, @RequestBody PutCategoryRequest category) {
+    public ResponseEntity<Void> putCategory(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id, @RequestBody PutCategoryRequest category) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
             Optional<Category> category1 = categoryServiece.findCategory(id);
