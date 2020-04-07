@@ -1,6 +1,6 @@
-package jgorny.portal.branch.serviece.model;
+package jgorny.portal.branch.repository.model;
 
-import jgorny.portal.category.serviece.model.Category;
+import jgorny.portal.category.repository.model.Category;
 import lombok.*;
 
 import javax.persistence.*;

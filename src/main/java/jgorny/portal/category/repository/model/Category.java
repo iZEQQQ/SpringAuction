@@ -1,7 +1,7 @@
-package jgorny.portal.category.serviece.model;
+package jgorny.portal.category.repository.model;
 
-import jgorny.portal.auction.serviece.model.Auction;
-import jgorny.portal.branch.serviece.model.Branch;
+import jgorny.portal.auction.repository.model.Auction;
+import jgorny.portal.branch.repository.model.Branch;
 import lombok.*;
 
 import javax.persistence.*;

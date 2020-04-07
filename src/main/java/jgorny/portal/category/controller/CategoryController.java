@@ -1,13 +1,13 @@
 package jgorny.portal.category.controller;
 
 import jgorny.portal.branch.serviece.BranchService;
-import jgorny.portal.branch.serviece.model.Branch;
+import jgorny.portal.branch.repository.model.Branch;
 import jgorny.portal.category.controller.model.GetCategoriesResponse;
 import jgorny.portal.category.controller.model.GetCategoryResponse;
 import jgorny.portal.category.controller.model.PostCategoryRequest;
 import jgorny.portal.category.controller.model.PutCategoryRequest;
 import jgorny.portal.category.serviece.CategoryServiece;
-import jgorny.portal.category.serviece.model.Category;
+import jgorny.portal.category.repository.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

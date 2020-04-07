@@ -5,13 +5,12 @@ import jgorny.portal.branch.controller.model.GetBranchesResponse;
 import jgorny.portal.branch.controller.model.PostBranchRequest;
 import jgorny.portal.branch.controller.model.PutBranchRequest;
 import jgorny.portal.branch.serviece.BranchService;
-import jgorny.portal.branch.serviece.model.Branch;
+import jgorny.portal.branch.repository.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController

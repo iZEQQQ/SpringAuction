@@ -1,11 +1,10 @@
 package jgorny.portal.branch.serviece;
 
 import jgorny.portal.branch.repository.BranchRepository;
-import jgorny.portal.branch.serviece.model.Branch;
+import jgorny.portal.branch.repository.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 

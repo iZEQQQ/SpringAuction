@@ -1,8 +1,8 @@
 package jgorny.portal.category.serviece;
 
-import jgorny.portal.branch.serviece.model.Branch;
+import jgorny.portal.branch.repository.model.Branch;
 import jgorny.portal.category.repository.CategoryRepository;
-import jgorny.portal.category.serviece.model.Category;
+import jgorny.portal.category.repository.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

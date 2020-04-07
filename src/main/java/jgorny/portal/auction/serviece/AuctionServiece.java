@@ -1,9 +1,8 @@
 package jgorny.portal.auction.serviece;
 
 import jgorny.portal.auction.repository.AuctionRepository;
-import jgorny.portal.auction.serviece.model.Auction;
-import jgorny.portal.branch.serviece.model.Branch;
-import jgorny.portal.category.serviece.model.Category;
+import jgorny.portal.auction.repository.model.Auction;
+import jgorny.portal.category.repository.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

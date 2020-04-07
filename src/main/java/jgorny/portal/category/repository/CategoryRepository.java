@@ -1,7 +1,7 @@
 package jgorny.portal.category.repository;
 
-import jgorny.portal.branch.serviece.model.Branch;
-import jgorny.portal.category.serviece.model.Category;
+import jgorny.portal.branch.repository.model.Branch;
+import jgorny.portal.category.repository.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
