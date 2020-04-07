@@ -25,9 +25,9 @@ public class BranchController {
         this.service = service;
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<GetBranchResponse> getBranch(@PathVariable("id") Long id) {
-        Optional<Branch> branch = service.findBranch(id);
+    @GetMapping("{branchId}")
+    public ResponseEntity<GetBranchResponse> getBranch(@PathVariable("branchId") Long branchId) {
+        Optional<Branch> branch = service.findBranch(branchId);
         return branch.map(value -> ResponseEntity.ok(new GetBranchResponse(value.getId(), value.getName())))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -38,18 +38,18 @@ public class BranchController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> postBranch(@RequestBody PostBranchRequest branch) {
-        Branch b = new Branch(branch.getName());
-        service.createBranch(b);
-        return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + b.getId())).build();
+    public ResponseEntity<Void> postBranch(@RequestBody PostBranchRequest request) {
+        Branch branch = new Branch(request.getName());
+        service.createBranch(branch);
+        return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + branch.getId())).build();
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Void> putBranch(@PathVariable("id") Long id, @RequestBody PutBranchRequest branch) {
-        Optional<Branch> b = service.findBranch(id);
-        if (b.isPresent()) {
-            b.get().setName(branch.getName());
-            service.updateBranch(b.get());
+    @PutMapping("{branchId}")
+    public ResponseEntity<Void> putBranch(@PathVariable("branchId") Long branchId, @RequestBody PutBranchRequest request) {
+        Optional<Branch> branch = service.findBranch(branchId);
+        if (branch.isPresent()) {
+            branch.get().setName(request.getName());
+            service.updateBranch(branch.get());
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
@@ -57,11 +57,11 @@ public class BranchController {
 
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteBranch(@PathVariable("id") Long id) {
-        Optional<Branch> b = service.findBranch(id);
-        if (b.isPresent()) {
-            service.deleteBranch(b.get());
+    @DeleteMapping("{branchId}")
+    public ResponseEntity<Void> deleteBranch(@PathVariable("branchId") Long branchId) {
+        Optional<Branch> branch = service.findBranch(branchId);
+        if (branch.isPresent()) {
+            service.deleteBranch(branch.get());
             return ResponseEntity.accepted().build();
         } else {
             return ResponseEntity.notFound().build();

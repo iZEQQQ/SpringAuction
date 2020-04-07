@@ -37,18 +37,15 @@ public class AuctionController {
         this.auctionServiece = auctionServiece;
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<GetAuctionResponse> getAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("id") Long id) {
+    @GetMapping("{auctionId}")
+    public ResponseEntity<GetAuctionResponse> getAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("auctionId") Long auctionId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
             Optional<Category> category = categoryServiece.findCategory(categoryId);
             if (category.isPresent()) {
-                Optional<Auction> auction = auctionServiece.findAuction(id);
-                if (auction.isPresent()) {
-                    return ResponseEntity.ok(new GetAuctionResponse(auction.get().getId(), auction.get().getName(), auction.get().getPrice()));
-                } else {
-                    return ResponseEntity.notFound().build();
-                }
+                Optional<Auction> auction = auctionServiece.findAuction(auctionId);
+                return auction.map(value -> ResponseEntity.ok(new GetAuctionResponse(value.getId(), value.getName(), value.getPrice(), value.getQuantity())))
+                        .orElseGet(() -> ResponseEntity.notFound().build());
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -72,14 +69,14 @@ public class AuctionController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> postAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @RequestBody PostAuctionRequest auction) {
+    public ResponseEntity<Void> postAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @RequestBody PostAuctionRequest request) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
             Optional<Category> category = categoryServiece.findCategory(categoryId);
             if (category.isPresent()) {
-                Auction auction1 = new Auction(auction.getName(), auction.getPrice(), category.get());
-                auctionServiece.createAuction(auction1);
-                return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + branchId + "/categories/" + categoryId + "/auctions/" + auction1.getId())).build();
+                Auction auction = new Auction(request.getName(), request.getPrice(),request.getQuantity(), category.get());
+                auctionServiece.createAuction(auction);
+                return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + branchId + "/categories/" + categoryId + "/auctions/" + auction.getId())).build();
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -88,19 +85,20 @@ public class AuctionController {
         }
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Void> putAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("id") Long id, @RequestBody PutAuctionRequest auction) {
+    @PutMapping("{auctionId}")
+    public ResponseEntity<Void> putAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("auctionId") Long auctionId, @RequestBody PutAuctionRequest request) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category1 = categoryServiece.findCategory(categoryId);
-            if (category1.isPresent()) {
-                Optional<Auction> auction1 = auctionServiece.findAuction(id);
-                if(auction1.isPresent()){
-                    auction1.get().setName(auction.getName());
-                    auction1.get().setPrice(auction.getPrice());
-                    auctionServiece.updateAuction(auction1.get());
+            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            if (category.isPresent()) {
+                Optional<Auction> auction = auctionServiece.findAuction(auctionId);
+                if (auction.isPresent()) {
+                    auction.get().setName(request.getName());
+                    auction.get().setPrice(request.getPrice());
+                    auction.get().setQuantity(request.getQuantity());
+                    auctionServiece.updateAuction(auction.get());
                     return ResponseEntity.noContent().build();
-                }else{
+                } else {
                     return ResponseEntity.notFound().build();
                 }
             } else {
@@ -111,29 +109,25 @@ public class AuctionController {
         }
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("id") Long id) {
+    @DeleteMapping("{auctionId}")
+    public ResponseEntity<Void> deleteAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("auctionId") Long auctionId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category1 = categoryServiece.findCategory(categoryId);
-            if (category1.isPresent()) {
-               Optional<Auction> auction = auctionServiece.findAuction(id);
-                if(auction.isPresent()){
+            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            if (category.isPresent()) {
+                Optional<Auction> auction = auctionServiece.findAuction(auctionId);
+                if (auction.isPresent()) {
                     auctionServiece.deleteAuction(auction.get());
                     return ResponseEntity.accepted().build();
-                }else{
+                } else {
                     return ResponseEntity.notFound().build();
                 }
             } else {
                 return ResponseEntity.notFound().build();
             }
-
         } else {
             return ResponseEntity.notFound().build();
         }
-
-
     }
-
 
 }

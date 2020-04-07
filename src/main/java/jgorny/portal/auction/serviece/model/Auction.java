@@ -23,13 +23,16 @@ public class Auction {
 
     private Double price;
 
+    private Integer quantity;
+
     @ManyToOne
     @JoinColumn(name = "category")
     private Category category;
 
-    public Auction(String name, Double price, Category category) {
+    public Auction(String name, Double price, Integer quantity, Category category) {
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
         this.category = category;
     }
 

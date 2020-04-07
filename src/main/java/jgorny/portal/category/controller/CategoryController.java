@@ -31,11 +31,11 @@ public class CategoryController {
     }
 
 
-    @GetMapping("{id}")
-    public ResponseEntity<GetCategoryResponse> getCategory(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id) {
+    @GetMapping("{categoryId}")
+    public ResponseEntity<GetCategoryResponse> getCategory(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(id);
+            Optional<Category> category = categoryServiece.findCategory(categoryId);
             return category.map(value -> ResponseEntity.ok(new GetCategoryResponse(value.getId(), value.getName())))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } else {
@@ -51,25 +51,25 @@ public class CategoryController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Void> postCategory(@PathVariable("branchId") Long branchId, @RequestBody PostCategoryRequest category) {
+    public ResponseEntity<Void> postCategory(@PathVariable("branchId") Long branchId, @RequestBody PostCategoryRequest request) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Category category1 = new Category(category.getName(), branch.get());
-            categoryServiece.createCategory(category1);
-            return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + branchId + "/categories/" + category1.getId())).build();
+            Category category = new Category(request.getName(), branch.get());
+            categoryServiece.createCategory(category);
+            return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + branchId + "/categories/" + category.getId())).build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Void> putCategory(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id, @RequestBody PutCategoryRequest category) {
+    @PutMapping("{categoryId}")
+    public ResponseEntity<Void> putCategory(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @RequestBody PutCategoryRequest request) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category1 = categoryServiece.findCategory(id);
-            if (category1.isPresent()) {
-                category1.get().setName(category.getName());
-                categoryServiece.updateCategory(category1.get());
+            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            if (category.isPresent()) {
+                category.get().setName(request.getName());
+                categoryServiece.updateCategory(category.get());
                 return ResponseEntity.noContent().build();
             } else {
                 return ResponseEntity.notFound().build();
@@ -80,13 +80,13 @@ public class CategoryController {
     }
 
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable("branchId") Long branchId, @PathVariable("id") Long id) {
+    @DeleteMapping("{categoryId}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category1 = categoryServiece.findCategory(id);
-            if (category1.isPresent()) {
-                categoryServiece.deleteCategory(category1.get());
+            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            if (category.isPresent()) {
+                categoryServiece.deleteCategory(category.get());
                 return ResponseEntity.accepted().build();
             } else {
                 return ResponseEntity.notFound().build();

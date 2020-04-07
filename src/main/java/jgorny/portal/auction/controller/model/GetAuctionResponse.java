@@ -15,4 +15,6 @@ public class GetAuctionResponse {
     private String name;
 
     private Double price;
+
+    public Integer quantity;
 }

@@ -10,8 +10,11 @@ import lombok.*;
 @NoArgsConstructor
 public class PostAuctionRequest {
 
+
     private String name;
 
     private Double price;
+
+    public Integer quantity;
 
 }

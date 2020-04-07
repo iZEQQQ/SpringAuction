@@ -55,7 +55,8 @@ Content-Type: application/json
 
 {
   "name": "phone",
-  "price": 20
+  "price": 20,
+  "quantity": 4
 }
 
 ###
@@ -64,7 +65,8 @@ Content-Type: application/json
 
 {
   "name": "pc",
-  "price": 300
+  "price": 300,
+  "quantity": 3
 }
 
 ###

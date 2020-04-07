@@ -14,4 +14,6 @@ public class PutAuctionRequest {
 
     private Double price;
 
+    public Integer quantity;
+
 }

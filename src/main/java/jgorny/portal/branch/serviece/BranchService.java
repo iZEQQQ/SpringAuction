@@ -30,14 +30,16 @@ public class BranchService {
     public Optional<Branch> findBranch(Long id) {
         return repository.findById(id);
     }
-    public void createBranch(Branch branch){
+
+    public void createBranch(Branch branch) {
         repository.save(branch);
     }
 
-    public void updateBranch(Branch branch){
+    public void updateBranch(Branch branch) {
         repository.save(branch);
     }
-    public void deleteBranch(Branch branch){
+
+    public void deleteBranch(Branch branch) {
         repository.delete(branch);
     }
 }
