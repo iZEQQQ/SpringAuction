@@ -6,9 +6,9 @@ import jgorny.portal.auction.controller.model.PostAuctionRequest;
 import jgorny.portal.auction.controller.model.PutAuctionRequest;
 import jgorny.portal.auction.serviece.AuctionServiece;
 import jgorny.portal.auction.repository.model.Auction;
-import jgorny.portal.branch.serviece.BranchService;
+import jgorny.portal.branch.service.BranchService;
 import jgorny.portal.branch.repository.model.Branch;
-import jgorny.portal.category.serviece.CategoryServiece;
+import jgorny.portal.category.service.CategoryService;
 import jgorny.portal.category.repository.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +23,14 @@ public class AuctionController {
 
     private BranchService branchService;
 
-    private CategoryServiece categoryServiece;
+    private CategoryService categoryService;
 
     private AuctionServiece auctionServiece;
 
     @Autowired
-    public AuctionController(BranchService branchService, CategoryServiece categoryServiece, AuctionServiece auctionServiece) {
+    public AuctionController(BranchService branchService, CategoryService categoryService, AuctionServiece auctionServiece) {
         this.branchService = branchService;
-        this.categoryServiece = categoryServiece;
+        this.categoryService = categoryService;
         this.auctionServiece = auctionServiece;
     }
 
@@ -38,7 +38,7 @@ public class AuctionController {
     public ResponseEntity<GetAuctionResponse> getAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("auctionId") Long auctionId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
                 Optional<Auction> auction = auctionServiece.findAuction(auctionId);
                 return auction.map(value -> ResponseEntity.ok(new GetAuctionResponse(value.getId(), value.getName(), value.getPrice(), value.getQuantity())))
@@ -57,7 +57,7 @@ public class AuctionController {
     public ResponseEntity<GetAuctionsResponse> getAuctions(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             return category.map(value -> ResponseEntity.ok(new GetAuctionsResponse(auctionServiece.findAllIds(value))))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } else {
@@ -69,7 +69,7 @@ public class AuctionController {
     public ResponseEntity<Void> postAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @RequestBody PostAuctionRequest request) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
                 Auction auction = new Auction(request.getName(), request.getPrice(),request.getQuantity(), category.get());
                 auctionServiece.createAuction(auction);
@@ -86,7 +86,7 @@ public class AuctionController {
     public ResponseEntity<Void> putAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("auctionId") Long auctionId, @RequestBody PutAuctionRequest request) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
                 Optional<Auction> auction = auctionServiece.findAuction(auctionId);
                 if (auction.isPresent()) {
@@ -110,7 +110,7 @@ public class AuctionController {
     public ResponseEntity<Void> deleteAuction(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @PathVariable("auctionId") Long auctionId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
                 Optional<Auction> auction = auctionServiece.findAuction(auctionId);
                 if (auction.isPresent()) {

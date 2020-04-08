@@ -1,12 +1,12 @@
 package jgorny.portal.category.controller;
 
-import jgorny.portal.branch.serviece.BranchService;
+import jgorny.portal.branch.service.BranchService;
 import jgorny.portal.branch.repository.model.Branch;
 import jgorny.portal.category.controller.model.GetCategoriesResponse;
 import jgorny.portal.category.controller.model.GetCategoryResponse;
 import jgorny.portal.category.controller.model.PostCategoryRequest;
 import jgorny.portal.category.controller.model.PutCategoryRequest;
-import jgorny.portal.category.serviece.CategoryServiece;
+import jgorny.portal.category.service.CategoryService;
 import jgorny.portal.category.repository.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class CategoryController {
     private BranchService branchService;
 
 
-    private CategoryServiece categoryServiece;
+    private CategoryService categoryService;
 
     @Autowired
-    public CategoryController(BranchService branchService, CategoryServiece categoryServiece) {
+    public CategoryController(BranchService branchService, CategoryService categoryService) {
         this.branchService = branchService;
-        this.categoryServiece = categoryServiece;
+        this.categoryService = categoryService;
     }
 
 
@@ -35,7 +35,7 @@ public class CategoryController {
     public ResponseEntity<GetCategoryResponse> getCategory(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             return category.map(value -> ResponseEntity.ok(new GetCategoryResponse(value.getId(), value.getName())))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } else {
@@ -46,7 +46,7 @@ public class CategoryController {
     @GetMapping("")
     public ResponseEntity<GetCategoriesResponse> getCategories(@PathVariable("branchId") Long branchId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
-        return branch.map(value -> ResponseEntity.ok(new GetCategoriesResponse(categoryServiece.findAllIds(value))))
+        return branch.map(value -> ResponseEntity.ok(new GetCategoriesResponse(categoryService.findAllIds(value))))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -55,7 +55,7 @@ public class CategoryController {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
             Category category = new Category(request.getName(), branch.get());
-            categoryServiece.createCategory(category);
+            categoryService.createCategory(category);
             return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + branchId + "/categories/" + category.getId())).build();
         } else {
             return ResponseEntity.notFound().build();
@@ -66,10 +66,10 @@ public class CategoryController {
     public ResponseEntity<Void> putCategory(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId, @RequestBody PutCategoryRequest request) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
                 category.get().setName(request.getName());
-                categoryServiece.updateCategory(category.get());
+                categoryService.updateCategory(category.get());
                 return ResponseEntity.noContent().build();
             } else {
                 return ResponseEntity.notFound().build();
@@ -84,9 +84,9 @@ public class CategoryController {
     public ResponseEntity<Void> deleteCategory(@PathVariable("branchId") Long branchId, @PathVariable("categoryId") Long categoryId) {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
-            Optional<Category> category = categoryServiece.findCategory(categoryId);
+            Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
-                categoryServiece.deleteCategory(category.get());
+                categoryService.deleteCategory(category.get());
                 return ResponseEntity.accepted().build();
             } else {
                 return ResponseEntity.notFound().build();

@@ -4,7 +4,7 @@ import jgorny.portal.branch.controller.model.GetBranchResponse;
 import jgorny.portal.branch.controller.model.GetBranchesResponse;
 import jgorny.portal.branch.controller.model.PostBranchRequest;
 import jgorny.portal.branch.controller.model.PutBranchRequest;
-import jgorny.portal.branch.serviece.BranchService;
+import jgorny.portal.branch.service.BranchService;
 import jgorny.portal.branch.repository.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

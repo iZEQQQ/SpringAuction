@@ -1,6 +1,5 @@
-package jgorny.portal.user.serviece;
+package jgorny.portal.user.service;
 
-import jgorny.portal.branch.repository.model.Branch;
 import jgorny.portal.user.repository.UserRepository;
 import jgorny.portal.user.repository.model.User;
 import org.springframework.beans.factory.annotation.Autowired;

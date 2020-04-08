@@ -1,4 +1,4 @@
-package jgorny.portal.branch.serviece;
+package jgorny.portal.branch.service;
 
 import jgorny.portal.branch.repository.BranchRepository;
 import jgorny.portal.branch.repository.model.Branch;

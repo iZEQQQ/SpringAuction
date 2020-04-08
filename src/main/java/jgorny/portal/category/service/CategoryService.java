@@ -1,4 +1,4 @@
-package jgorny.portal.category.serviece;
+package jgorny.portal.category.service;
 
 import jgorny.portal.branch.repository.model.Branch;
 import jgorny.portal.category.repository.CategoryRepository;
@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryServiece {
+public class CategoryService {
 
     private CategoryRepository repository;
 
     @Autowired
-    public CategoryServiece(CategoryRepository repository) {
+    public CategoryService(CategoryRepository repository) {
         this.repository = repository;
     }
 
