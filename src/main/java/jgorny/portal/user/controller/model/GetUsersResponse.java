@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetUsersResponse {
+
     private List<Long> ids = new ArrayList<>();
 
 }

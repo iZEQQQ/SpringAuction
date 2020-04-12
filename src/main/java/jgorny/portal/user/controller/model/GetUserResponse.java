@@ -9,5 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetUserResponse {
+
     private String login;
+
 }
+
