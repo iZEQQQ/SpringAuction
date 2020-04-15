@@ -99,3 +99,27 @@ GET http://localhost:8080/api/users/Jax
 
 ###
 DELETE http://localhost:8080/api/users/Jax
+
+###
+
+
+#POST http://localhost:8080/api/users/Jax/1
+#Content-Type: application/json
+#
+#{
+#  "date": "25/03/2020"
+#}
+#
+####error because it's id for now
+#PUT http://localhost:8080/api/users/Jax
+#Content-Type: application/json
+#
+#{
+#  "login": "Pantheon"
+#}
+####
+#
+#GET http://localhost:8080/api/users
+####
+#
+#GET http://localhost:8080/api/users/Jax
