@@ -83,7 +83,7 @@ Content-Type: application/json
   "login": "Jax"
 }
 
-###error because it's id
+###error because it's id for now
 PUT http://localhost:8080/api/users/Jax
 Content-Type: application/json
 
