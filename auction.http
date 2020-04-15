@@ -76,3 +76,26 @@ DELETE http://localhost:8080/api/branches/1/categories/2/auctions/2
 GET http://localhost:8080/api/branches/1/categories/3/auctions/2
 
 ###
+POST http://localhost:8080/api/users/
+Content-Type: application/json
+
+{
+  "login": "Jax"
+}
+
+###error because it's id
+PUT http://localhost:8080/api/users/Jax
+Content-Type: application/json
+
+{
+  "login": "Pantheon"
+}
+###
+
+GET http://localhost:8080/api/users
+###
+
+GET http://localhost:8080/api/users/Jax
+
+###
+DELETE http://localhost:8080/api/users/Jax

@@ -60,4 +60,17 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("{login}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("login") String login){
+        Optional<User> user = service.findUser(login);
+        if(user.isPresent()){
+            service.deleteUser(user.get());
+            return ResponseEntity.accepted().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
 }

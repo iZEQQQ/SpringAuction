@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 public class GetUsersResponse {
 
-    private List<Long> ids = new ArrayList<>();
+    private List<String> ids = new ArrayList<>();
 
 }
