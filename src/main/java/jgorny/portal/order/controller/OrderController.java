@@ -3,7 +3,6 @@ package jgorny.portal.order.controller;
 import jgorny.portal.order.controller.model.GetOrderResponse;
 import jgorny.portal.order.controller.model.GetOrdersResponse;
 import jgorny.portal.order.controller.model.PostOrderRequest;
-import jgorny.portal.order.controller.model.PutOrderRequest;
 import jgorny.portal.order.repository.model.Order;
 import jgorny.portal.order.service.OrderService;
 import jgorny.portal.user.repository.model.User;
@@ -34,7 +33,7 @@ public class OrderController {
         Optional<User> user = userService.findUser(login);
         if (user.isPresent()) {
             Optional<Order> order = orderService.findOrder(orderId);
-            return order.map(value -> ResponseEntity.ok(new GetOrderResponse(value.getId(), value.getDate())))
+            return order.map(value -> ResponseEntity.ok(new GetOrderResponse(value.getId(), value.getLocalDateTime())))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } else {
             return ResponseEntity.notFound().build();
@@ -52,26 +51,9 @@ public class OrderController {
     public ResponseEntity<Void> postOrder(@PathVariable("login") String login, @RequestBody PostOrderRequest request) {
         Optional<User> user = userService.findUser(login);
         if (user.isPresent()) {
-            Order order = new Order(request.getDate(), user.get());
+            Order order = new Order(null, user.get());
             orderService.createOrder(order);
             return ResponseEntity.created(URI.create("/api/users/" + login + "/orders/" + order.getId())).build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("{orderId}")
-    public ResponseEntity<Void> putCategory(@PathVariable("login") String login, @PathVariable("orderId") Long orderId, @RequestBody PutOrderRequest request) {
-        Optional<User> user = userService.findUser(login);
-        if (user.isPresent()) {
-            Optional<Order> order = orderService.findOrder(orderId);
-            if (order.isPresent()) {
-                order.get().setDate(request.getDate());
-                orderService.updateOrder(order.get());
-                return ResponseEntity.noContent().build();
-            } else {
-                return ResponseEntity.notFound().build();
-            }
         } else {
             return ResponseEntity.notFound().build();
         }

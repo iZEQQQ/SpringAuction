@@ -13,3 +13,20 @@ INSERT INTO auctions (id, name, price, quantity, category) VALUES
     (1,'zabawka',20,4,2),
     (2,'koc',100,7,2),
     (3,'kubek',15,8,3);
+
+
+
+INSERT INTO users (login) VALUES
+    ('Jax'),
+    ('Mike'),
+    ('Yuri');
+
+INSERT INTO orders (id, user_name,local_date_time) VALUES
+    (1,'Jax','2005-10-20 10:40'),
+    (2,'Yuri', '2020-05-31 15:15'),
+    (3,'Jax', '2016-9-17 21:21');
+
+INSERT INTO order_items (order, auction, quantity) VALUES
+    (1,2,5),
+    (2,3,3),
+    (1,3,10);

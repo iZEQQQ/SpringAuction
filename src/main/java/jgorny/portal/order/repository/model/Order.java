@@ -1,11 +1,11 @@
 package jgorny.portal.order.repository.model;
 
-import jgorny.portal.auction.repository.model.Auction;
 import jgorny.portal.user.repository.model.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,21 +19,22 @@ import java.util.List;
 public class Order {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date date;
+    @Column(name = "local_date_time")
+    private LocalDateTime localDateTime;
 
     @ManyToOne
-    @JoinColumn(name = "users")
+    @JoinColumn(name = "user_name")
     private User user;
 
-    public Order(Date date, User user) {
-        this.date = date;
+    public Order(LocalDateTime localDateTime, User user) {
+        this.localDateTime = localDateTime;
         this.user = user;
     }
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<User> users;
-
+    private List<OrderItem> items;
 
 }

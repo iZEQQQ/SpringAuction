@@ -1,9 +1,11 @@
 package jgorny.portal.auction.repository.model;
 
 import jgorny.portal.category.repository.model.Category;
+import jgorny.portal.order.repository.model.OrderItem;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,5 +37,8 @@ public class Auction {
         this.quantity = quantity;
         this.category = category;
     }
+
+    @OneToMany(mappedBy = "auction", fetch = FetchType.LAZY)
+    private List<OrderItem> items;
 
 }

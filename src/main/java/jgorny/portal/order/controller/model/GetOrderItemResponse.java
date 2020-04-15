@@ -1,9 +1,7 @@
 package jgorny.portal.order.controller.model;
 
+import jgorny.portal.auction.controller.model.GetAuctionResponse;
 import lombok.*;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -11,10 +9,12 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetOrderResponse {
+public class GetOrderItemResponse {
 
     private Long id;
 
-    private LocalDateTime localDateTime;
+    private int quantity;
+
+    private GetAuctionResponse auction;
 
 }
