@@ -2,7 +2,6 @@ package jgorny.portal.order.repository;
 
 import jgorny.portal.order.repository.model.Order;
 import jgorny.portal.order.repository.model.OrderItem;
-import jgorny.portal.user.repository.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,7 +16,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem,Long> {
     List<Long> findId();
 
     @Query("select oi.id from OrderItem oi where oi.order = :order")
-    List<Long> findId(Order Order);
+    List<Long> findId(Order order);
 
 
 }

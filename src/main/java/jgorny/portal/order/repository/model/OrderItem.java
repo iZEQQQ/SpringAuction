@@ -22,6 +22,7 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne()
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne()
@@ -29,4 +30,9 @@ public class OrderItem {
 
     private int quantity;
 
+    public OrderItem(Order order, Auction auction, int quantity) {
+    this.order = order;
+    this.auction = auction;
+    this.quantity = quantity;
+    }
 }

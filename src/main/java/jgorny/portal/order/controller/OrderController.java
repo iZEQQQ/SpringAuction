@@ -2,6 +2,7 @@ package jgorny.portal.order.controller;
 
 import jgorny.portal.order.controller.model.GetOrderResponse;
 import jgorny.portal.order.controller.model.GetOrdersResponse;
+import jgorny.portal.order.controller.model.OrderItemRequest;
 import jgorny.portal.order.controller.model.PostOrderRequest;
 import jgorny.portal.order.repository.model.Order;
 import jgorny.portal.order.service.OrderService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users/{login}/orders")
@@ -52,7 +54,7 @@ public class OrderController {
         Optional<User> user = userService.findUser(login);
         if (user.isPresent()) {
             Order order = new Order(null, user.get());
-            orderService.createOrder(order);
+            orderService.createOrder(login, request.getItems().stream().collect(Collectors.toMap(OrderItemRequest::getAuctionId, OrderItemRequest::getQuantity)));
             return ResponseEntity.created(URI.create("/api/users/" + login + "/orders/" + order.getId())).build();
         } else {
             return ResponseEntity.notFound().build();

@@ -101,4 +101,19 @@ GET http://localhost:8080/api/users/Jax/orders/1
 DELETE http://localhost:8080/api/users/Jax
 
 ###
+POST http://localhost:8080/api/users/Jax/orders
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "auctionId": 1,
+       "quantity": 4
+    },
+    {
+      "auctionId": 2,
+      "quantity": 3
+    }
+  ]
+}
 
