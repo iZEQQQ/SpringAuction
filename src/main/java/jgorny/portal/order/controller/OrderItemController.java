@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin//TODO na wszystkie konctollery
+@CrossOrigin
 @RestController
 @RequestMapping("/api/users/{login}/orders/{orderId}/items")
 public class OrderItemController {
