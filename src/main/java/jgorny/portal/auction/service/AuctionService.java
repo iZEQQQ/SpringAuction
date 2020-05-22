@@ -1,4 +1,4 @@
-package jgorny.portal.auction.serviece;
+package jgorny.portal.auction.service;
 
 import jgorny.portal.auction.repository.AuctionRepository;
 import jgorny.portal.auction.repository.model.Auction;
@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AuctionServiece {
+public class AuctionService {
 
     private AuctionRepository repository;
 
     @Autowired
-    public AuctionServiece(AuctionRepository repository) {
+    public AuctionService(AuctionRepository repository) {
         this.repository = repository;
     }
 

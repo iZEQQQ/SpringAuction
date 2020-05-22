@@ -4,7 +4,7 @@ import jgorny.portal.auction.controller.model.GetAuctionResponse;
 import jgorny.portal.auction.controller.model.GetAuctionsResponse;
 import jgorny.portal.auction.controller.model.PostAuctionRequest;
 import jgorny.portal.auction.controller.model.PutAuctionRequest;
-import jgorny.portal.auction.serviece.AuctionServiece;
+import jgorny.portal.auction.service.AuctionService;
 import jgorny.portal.auction.repository.model.Auction;
 import jgorny.portal.branch.service.BranchService;
 import jgorny.portal.branch.repository.model.Branch;
@@ -25,13 +25,13 @@ public class AuctionController {
 
     private CategoryService categoryService;
 
-    private AuctionServiece auctionServiece;
+    private AuctionService auctionService;
 
     @Autowired
-    public AuctionController(BranchService branchService, CategoryService categoryService, AuctionServiece auctionServiece) {
+    public AuctionController(BranchService branchService, CategoryService categoryService, AuctionService auctionService) {
         this.branchService = branchService;
         this.categoryService = categoryService;
-        this.auctionServiece = auctionServiece;
+        this.auctionService = auctionService;
     }
 
     @GetMapping("{auctionId}")
@@ -40,7 +40,7 @@ public class AuctionController {
         if (branch.isPresent()) {
             Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
-                Optional<Auction> auction = auctionServiece.findAuction(auctionId);
+                Optional<Auction> auction = auctionService.findAuction(auctionId);
                 return auction.map(value -> ResponseEntity.ok(new GetAuctionResponse(value.getId(), value.getName(), value.getPrice(), value.getQuantity())))
                         .orElseGet(() -> ResponseEntity.notFound().build());
             } else {
@@ -58,7 +58,7 @@ public class AuctionController {
         Optional<Branch> branch = branchService.findBranch(branchId);
         if (branch.isPresent()) {
             Optional<Category> category = categoryService.findCategory(categoryId);
-            return category.map(value -> ResponseEntity.ok(new GetAuctionsResponse(auctionServiece.findAllIds(value))))
+            return category.map(value -> ResponseEntity.ok(new GetAuctionsResponse(auctionService.findAllIds(value))))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         } else {
             return ResponseEntity.notFound().build();
@@ -72,7 +72,7 @@ public class AuctionController {
             Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
                 Auction auction = new Auction(request.getName(), request.getPrice(),request.getQuantity(), category.get());
-                auctionServiece.createAuction(auction);
+                auctionService.createAuction(auction);
                 return ResponseEntity.created(URI.create("http://localhost:8080/api/branches/" + branchId + "/categories/" + categoryId + "/auctions/" + auction.getId())).build();
             } else {
                 return ResponseEntity.notFound().build();
@@ -88,12 +88,12 @@ public class AuctionController {
         if (branch.isPresent()) {
             Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
-                Optional<Auction> auction = auctionServiece.findAuction(auctionId);
+                Optional<Auction> auction = auctionService.findAuction(auctionId);
                 if (auction.isPresent()) {
                     auction.get().setName(request.getName());
                     auction.get().setPrice(request.getPrice());
                     auction.get().setQuantity(request.getQuantity());
-                    auctionServiece.updateAuction(auction.get());
+                    auctionService.updateAuction(auction.get());
                     return ResponseEntity.noContent().build();
                 } else {
                     return ResponseEntity.notFound().build();
@@ -112,9 +112,9 @@ public class AuctionController {
         if (branch.isPresent()) {
             Optional<Category> category = categoryService.findCategory(categoryId);
             if (category.isPresent()) {
-                Optional<Auction> auction = auctionServiece.findAuction(auctionId);
+                Optional<Auction> auction = auctionService.findAuction(auctionId);
                 if (auction.isPresent()) {
-                    auctionServiece.deleteAuction(auction.get());
+                    auctionService.deleteAuction(auction.get());
                     return ResponseEntity.accepted().build();
                 } else {
                     return ResponseEntity.notFound().build();
