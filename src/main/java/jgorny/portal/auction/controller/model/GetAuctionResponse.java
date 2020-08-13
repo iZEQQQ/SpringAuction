@@ -16,5 +16,5 @@ public class GetAuctionResponse {
 
     private Double price;
 
-    public Integer quantity;
+    private Integer quantity;
 }

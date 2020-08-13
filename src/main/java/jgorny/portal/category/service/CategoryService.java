@@ -18,7 +18,7 @@ public class CategoryService {
     public CategoryService(CategoryRepository repository) {
         this.repository = repository;
     }
-
+    
     public List<Long> findAllIds(Branch branch){
         return repository.findId(branch);
     }

@@ -2,7 +2,6 @@ package jgorny.portal.order.repository.model;
 
 import jgorny.portal.auction.repository.model.Auction;
 import lombok.*;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 
