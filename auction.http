@@ -24,6 +24,7 @@ DELETE http://localhost:8080/api/branches/4
 
 ###
 GET http://localhost:8080/api/branches/3/categories
+
 ###
 GET http://localhost:8080/api/branches/3/categories/4
 
@@ -90,9 +91,11 @@ Content-Type: application/json
 {
   "login": "Pantheon"
 }
+
 ###
 
 GET http://localhost:8080/api/users
+
 ###
 
 GET http://localhost:8080/api/users/Jax/orders/1
@@ -108,7 +111,7 @@ Content-Type: application/json
   "items": [
     {
       "auctionId": 1,
-       "quantity": 4
+      "quantity": 4
     },
     {
       "auctionId": 2,
@@ -117,3 +120,14 @@ Content-Type: application/json
   ]
 }
 
+###
+POST http://localhost:8080/api/users/Jax/basket/items/
+Content-Type: application/json
+
+{
+  "auctionId": 1,
+  "quantity": 2
+}
+
+###
+GET http://localhost:8080/api/users/Jax/basket/items/
