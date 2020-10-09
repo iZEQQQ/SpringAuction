@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true")
 @RestController
 @Scope("request")
 @RequestMapping("/api/users/{login}/basket/items")
