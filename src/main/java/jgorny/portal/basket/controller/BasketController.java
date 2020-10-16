@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(allowCredentials = "true")
 @RestController
-@Scope("request")
+//@Scope("request") Still a singleton but injecting is working
 @RequestMapping("/api/users/{login}/basket/items")
 public class BasketController {
 

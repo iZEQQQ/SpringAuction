@@ -2,6 +2,7 @@ package jgorny.portal.basket.bean;
 
 import jgorny.portal.basket.bean.model.BasketItem;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@Scope("session")
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class BasketBean {
 
     private List<BasketItem> items = new ArrayList<>();
