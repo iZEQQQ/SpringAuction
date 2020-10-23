@@ -19,8 +19,17 @@ public class User {
     @Id
     private String login;
 
+    private String password;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Order> orders;
+
+    @ElementCollection
+    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_name"))
+    @Column(name = "role_name")
+    private List<String> role_name;
 
     public User(String login) {
         this.login = login;

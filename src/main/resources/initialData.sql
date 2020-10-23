@@ -13,10 +13,16 @@ INSERT INTO auctions (id, name, price, quantity, category) VALUES
     (2,'koc',100,7,2),
     (3,'kubek',15,8,3);
 
-INSERT INTO users (login) VALUES
-    ('Jax'),
-    ('Yuri'),
-    ('Mate');
+INSERT INTO users (login,password) VALUES
+    ('Jax','admin'),
+    ('Yuri','user'),
+    ('Mate','user');
+
+INSERT INTO roles (user_name, role_name) VALUES
+    ('Jax', 'Admin'),
+    ('Jax', 'User'),
+    ('Yuri', 'User'),
+    ('Mate', 'User');
 
 INSERT INTO orders (id, user_name,local_date_time) VALUES
     (1,'Jax','2005-10-20 10:40'),
