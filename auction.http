@@ -1,12 +1,12 @@
 GET http://localhost:8080/api/branches
-Authorization: Basic dXNlcjp1c2Vy
+Authorization: Basic WXVyaTp1c2Vy
 
 ###
 GET http://localhost:8080/api/branches/2
 
 ###
 POST http://localhost:8080/api/branches
-Authorization: Basic YWRtaW46YWRtaW4=
+Authorization: Basic SmF4OmFkbWlu
 Content-Type: application/json
 
 {

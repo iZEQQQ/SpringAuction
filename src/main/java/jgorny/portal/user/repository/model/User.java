@@ -26,10 +26,10 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Order> orders;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "user_name"))
     @Column(name = "role_name")
-    private List<String> role_name;
+    private List<String> roles;
 
     public User(String login) {
         this.login = login;
