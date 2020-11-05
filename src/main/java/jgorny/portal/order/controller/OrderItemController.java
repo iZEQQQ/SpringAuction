@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true")
 @RestController
 @RequestMapping("/api/users/{login}/orders/{orderId}/items")
 public class OrderItemController {
