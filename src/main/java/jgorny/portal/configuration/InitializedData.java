@@ -8,12 +8,12 @@ import jgorny.portal.category.repository.model.Category;
 import jgorny.portal.category.service.CategoryService;
 import jgorny.portal.user.repository.model.User;
 import jgorny.portal.user.service.UserService;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.InputStream;
+import java.util.List;
 
 @Component
 public class InitializedData {
@@ -40,39 +40,36 @@ public class InitializedData {
     @PostConstruct
     private synchronized void init() {
         if (userService.findUser("Jax").isEmpty()) {
+            BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+
             User jax = User.builder()
                     .login("Jax")
-                    .password("$2a$10$hJMqlcX6yldSFQFL4s4HkeALoIK9JbWbW6F.zBEkCJo4NR.ar8JLS")
+                    .password(bc.encode("admin"))
+                    .roles(List.of("Admin", "User"))
                     .build();
             User yuri = User.builder()
                     .login("Yuri")
-                    .password("$2y$10$xl6SDXEYyV10mQuubEXJteO7vKn9Xv1qTRLvuO9BTGIgC33hrqERG")
+                    .password(bc.encode("user"))
+                    .roles(List.of("User"))
                     .build();
             User mate = User.builder()
                     .login("Mate")
-                    .password("$2y$10$xl6SDXEYyV10mQuubEXJteO7vKn9Xv1qTRLvuO9BTGIgC33hrqERG")
+                    .password(bc.encode("user"))
+                    .roles(List.of("User"))
                     .build();
 
             userService.createUser(jax);
             userService.createUser(yuri);
             userService.createUser(mate);
 
-//            Roles ?
-//            Sha256Utility.hash("admin")
-//            Sha256Utility.hash("user")
 
-        }
-        if (branchService.findAllBranches().isEmpty()) {
             Branch meat = Branch.builder()
-                    .id((long) 1)
                     .name("meat")
                     .build();
             Branch vegetables = Branch.builder()
-                    .id((long) 2)
                     .name("vegetables ")
                     .build();
             Branch toys = Branch.builder()
-                    .id((long) 3)
                     .name("toys")
                     .build();
 
@@ -80,70 +77,48 @@ public class InitializedData {
             branchService.createBranch(vegetables);
             branchService.createBranch(toys);
 
-//            id ?? capture of?
-        }
-        if (categoryService.findAllCategories().isEmpty()) {
+
             Category car = Category.builder()
-                    .id((long) 1)
                     .name("car")
-                    .branch(3)
+                    .branch(toys)
                     .build();
             Category game = Category.builder()
-                    .id((long) 2)
                     .name("game")
-                    .branch(3)
+                    .branch(toys)
                     .build();
             Category lego = Category.builder()
-                    .id((long) 3)
                     .name("lego")
-                    .branch(3)
+                    .branch(toys)
                     .build();
 
             categoryService.createCategory(car);
             categoryService.createCategory(game);
             categoryService.createCategory(lego);
-//            branch ???
-        }
-        if (auctionService.findAllAuctions().isEmpty()) {
+
             Auction zabawka = Auction.builder()
-                    .id((long) 1)
                     .name("zabawka")
                     .price((double) 20)
                     .quantity(4)
-                    .category()
+                    .category(game)
                     .build();
             Auction koc = Auction.builder()
-                    .id((long) 2)
                     .name("koc")
                     .price((double) 100)
                     .quantity(7)
-                    .category()
+                    .category(game)
                     .build();
             Auction kubek = Auction.builder()
-                    .id((long) 3)
                     .name("kubek")
                     .price((double) 15)
                     .quantity(8)
-                    .category()
+                    .category(lego)
                     .build();
 
             auctionService.createAuction(zabawka);
             auctionService.createAuction(koc);
             auctionService.createAuction(kubek);
 
-//            category??
+
         }
-
     }
-
-
 }
-
-
-    @SneakyThrows
-    private byte[] getResourceAsByteArray(String name) {
-        try (InputStream is = this.getClass().getResourceAsStream(name)) {
-            return is.readAllBytes();
-        }
-
-    }
