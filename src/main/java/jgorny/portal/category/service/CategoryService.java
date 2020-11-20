@@ -6,6 +6,7 @@ import jgorny.portal.category.repository.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,5 +38,9 @@ public class CategoryService {
 
     public void deleteCategory(Category category) {
         repository.delete(category);
+    }
+
+    public List<Category> findAllCategories() {
+        return repository.findAll();
     }
 }

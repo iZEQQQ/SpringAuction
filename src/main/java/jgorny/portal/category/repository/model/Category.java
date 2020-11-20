@@ -3,12 +3,14 @@ package jgorny.portal.category.repository.model;
 import jgorny.portal.auction.repository.model.Auction;
 import jgorny.portal.branch.repository.model.Branch;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
+@SuperBuilder
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor

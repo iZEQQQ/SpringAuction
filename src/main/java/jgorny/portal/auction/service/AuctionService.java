@@ -23,6 +23,10 @@ public class AuctionService {
         return repository.findId(category);
     }
 
+    public List<Auction> findAllAuctions() {
+        return repository.findAll();
+    }
+
     public Optional<Auction> findAuction(Long id) {
         return repository.findById(id);
     }
