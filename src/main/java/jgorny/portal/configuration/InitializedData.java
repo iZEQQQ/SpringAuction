@@ -131,6 +131,7 @@ public class InitializedData {
             auctionService.createAuction(koc);
             auctionService.createAuction(kubek);
 
+//            category??
         }
 
     }
