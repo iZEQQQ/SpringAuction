@@ -10,4 +10,5 @@ class AuctionApplicationTests {
 	void contextLoads() {
 	}
 
+
 }
