@@ -33,6 +33,3 @@ INSERT INTO order_items (order_id, auction_id, quantity) VALUES
     (1,2,5),
     (2,3,3),
     (1,3,10);
-
-
--- TODO z springa przykladu z rpg znalexc przyklad do wgrania przykladowej bazy danych
